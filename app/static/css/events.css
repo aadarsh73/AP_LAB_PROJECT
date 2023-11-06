@@ -1,0 +1,41 @@
+.events-card {
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.events-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-size: 1.25rem;
+}
+
+.card-footer {
+    background: #fff;
+}
+
+.badge-pill {
+    padding: 0.6em 0.9em;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+.btn-outline-primary {
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}

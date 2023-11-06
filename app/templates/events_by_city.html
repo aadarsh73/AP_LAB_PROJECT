@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        {% for event in events %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card events-card border-0 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{ event.title }}</h5>
+                        <p class="text-muted mb-2">Organized by: {{ event.organizer.username }}</p>
+                        <p class="card-text">{{ event.description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush border-top">
+                        <li class="list-group-item">Location: {{ event.location }}</li>
+                        <li class="list-group-item">Start: {{ event.start_time.strftime('%Y-%m-%d %H:%M') }}</li>
+                        <li class="list-group-item">End: {{ event.end_time.strftime('%Y-%m-%d %H:%M') }}</li>
+                    </ul>
+                    <div class="card-footer bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge badge-pill {{ 'badge-success' if event.status == 'Live' else 'badge-secondary' if event.status == 'Coming Soon' else 'badge-danger' }}">{{ event.status }}</span>
+                            {% if current_user.is_authenticated and user_is_attendee %}
+                                <form action="{{ url_for('main.attend_event', event_id=event.id) }}" method="post">
+                                    {{ form.hidden_tag() }}
+                                    {% if current_user in event.attendees %}
+                                        <button type="submit" class="btn btn-warning btn-sm">Unattend</button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-primary btn-sm">Attend</button>
+                                    {% endif %}
+                                </form>
+                            {% endif %}
+                        </div>
+                        <small class="text-muted">Attendees: {{ event.attendees|length }}</small>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-center mt-5">No events available in {{ city }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

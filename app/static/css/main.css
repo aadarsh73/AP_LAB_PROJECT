@@ -1,0 +1,135 @@
+/* main.css */
+.createEvent-form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.createEvent-form-group {
+  margin-bottom: 1rem;
+}
+
+.createEvent-form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.createEvent-form-control {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.createEvent-form-control:focus {
+  border-color: #007bff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.createEvent-form-button {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.createEvent-form-button:hover {
+  background-color: #0056b3;
+}
+
+#calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.index-container {
+    padding: 20px;
+}
+
+.index-title {
+    text-align: center;
+    color: #333;
+}
+
+.index-subtitle {
+    color: #555;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.index-events-container {
+    margin-top: 30px;
+}
+
+.index-events-section {
+    margin-bottom: 30px;
+}
+
+.index-section-title {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.index-event-item {
+    border-left: 4px solid #007bff;
+    transition: all 0.3s ease;
+}
+
+.index-event-item:hover {
+    background-color: #f8f9fa;
+    border-left-color: #0056b3;
+}
+
+.index-no-events {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+
+.index-event-status-live {
+    color: #28a745;
+}
+
+.index-event-status-upcoming {
+    color: #ffc107;
+}
+
+.index-event-title {
+    font-size: 1.1rem;
+    color: #0056b3;
+    margin-top: 2%;
+}
+
+.index-event-description {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.index-event-time {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.index-calendar-container {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+
+
+
+
+/* Add responsiveness to the form container */
+@media (max-width: 768px) {
+  .createEvent-form-container {
+    width: 90%;
+    padding: 1rem;
+  }
+}
+
+

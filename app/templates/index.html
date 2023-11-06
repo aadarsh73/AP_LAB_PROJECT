@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Welcome to the Community Events Platform</h1>
+{% if current_user.is_authenticated %}
+<div class="index-container my-5">
+    <h1 class="index-title mb-4">Welcome, {{ current_user.username }}</h1>
+    <div class="index-events-container">
+        {% if current_user.role == 'organization' %}
+            <a href="{{ url_for('main.create_event') }}" class="btn btn-primary">Create Event</a>
+            <a href="{{ url_for('main.events') }}" class="btn btn-secondary">View Events</a>
+        {% else %}
+            <a href="{{ url_for('main.events') }}" class="btn btn-secondary">View Events</a>
+        {% endif %}
+        <h2 class="index-subtitle mb-3">Your Events</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="index-events-section">
+                    <h3 class="index-section-title">Ongoing Events</h3>
+                    <div class="list-group">
+                        {% for event in ongoing_events %}
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1 index-event-title">{{ event.title }}</h5>
+                                    <small class="index-event-status-live">Live</small>
+                                </div>
+                                <p class="mb-1 index-event-description">{{ event.description }}</p>
+                                <small class="index-event-time">Ends: {{ event.end_time.strftime('%Y-%m-%d %H:%M') }}</small>
+                            </a>
+                        {% else %}
+                            <div class="index-no-events">No ongoing events.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="index-events-section">
+                    <h3 class="index-section-title">Upcoming Events</h3>
+                    <div class="list-group">
+                        {% for event in upcoming_events %}
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1 index-event-title">{{ event.title }}</h5>
+                                    <small class="index-event-status-upcoming">Coming Soon</small>
+                                </div>
+                                <p class="mb-1 index-event-description">{{ event.description }}</p>
+                                <small class="index-event-time">Starts: {{ event.start_time.strftime('%Y-%m-%d %H:%M') }}</small>
+                            </a>
+                        {% else %}
+                            <div class="index-no-events">No upcoming events.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="index-calendar-container mt-5">
+            <h2 class="index-subtitle">Calendar</h2>
+            <div id='calendar'>
+                <script src='https://unpkg.com/fullcalendar@5.10.1/main.min.js'></script>
+
+                <!-- Initialize the calendar -->
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var calendarEl = document.getElementById('calendar');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        events: {{ event_data | tojson | safe }}
+                    });
+                    calendar.render();
+                });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+  <a href="{{ url_for('auth.logout') }}" class="btn btn-danger">Logout</a>
+{% else %}
+  <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+  <a href="{{ url_for('auth.register') }}" class="btn btn-secondary">Register</a>
+{% endif %}
+{% endblock %}

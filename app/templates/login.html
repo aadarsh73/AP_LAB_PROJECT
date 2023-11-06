@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4 text-center">Login</h2>
+            <form method="POST" action="{{ url_for('auth.login') }}" class="needs-validation" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.username.label(class='form-label') }}
+                    {{ form.username(class='form-control', required=True, placeholder='Username') }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class='form-label') }}
+                    {{ form.password(class='form-control', required=True, placeholder='Password') }}
+                </div>
+                <div class="text-center">
+                    {{ form.submit(class='btn btn-primary mt-3') }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="createEvent-form-container">
+    <h2 style="text-align: center;">Create an Event</h2>
+    <form action="{{ url_for('main.create_event') }}" method="post">
+        {{ form.hidden_tag() }}
+
+        <div class="createEvent-form-group">
+            {{ form.title.label(class='createEvent-form-label') }}
+            {{ form.title(class='createEvent-form-control') }}
+        </div>
+
+        <div class="createEvent-form-group">
+            {{ form.description.label(class='createEvent-form-label') }}
+            {{ form.description(class='createEvent-form-control') }}
+        </div>
+
+        <div class="createEvent-form-group">
+            {{ form.location.label(class='createEvent-form-label') }}
+            {{ form.location(class='createEvent-form-control') }}
+        </div>
+
+        <div class="createEvent-form-group">
+            {{ form.start_date.label(class='createEvent-form-label') }}
+            {{ form.start_date(class='createEvent-form-control', type='date') }}
+            {{ form.start_time.label(class='createEvent-form-label') }}
+            {{ form.start_time(class='createEvent-form-control', type='time') }}
+        </div>
+
+        <div class="createEvent-form-group">
+            {{ form.end_date.label(class='createEvent-form-label') }}
+            {{ form.end_date(class='createEvent-form-control', type='date') }}
+            {{ form.end_time.label(class='createEvent-form-label') }}
+            {{ form.end_time(class='createEvent-form-control', type='time') }}
+        </div>
+
+        {{ form.submit(class='createEvent-form-button') }}
+    </form>
+</div>
+{% endblock %}
