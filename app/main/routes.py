@@ -150,3 +150,21 @@ def attend_event(event_id):
 
     return redirect(request.referrer or url_for('main.events'))
 
+@main.route('/delete_event/<int:event_id>', methods=['POST'])
+@login_required
+def delete_event(event_id):
+    if not is_organization(current_user):
+        flash('You do not have permission to delete this event.', 'danger')
+        return redirect(url_for('main.events'))
+
+    event = Event.query.get_or_404(event_id)
+    if event.organizer_id != current_user.id:
+        flash('You do not have permission to delete this event.', 'danger')
+        return redirect(url_for('main.events'))
+
+    db.session.delete(event)
+    db.session.commit()
+    flash('Event deleted.', 'success')
+    return redirect(url_for('main.events'))
+
+

@@ -30,6 +30,12 @@
                             {% endif %}
                         </div>
                         <small class="text-muted">Attendees: {{ event.attendees|length }}</small>
+                        {% if current_user.is_authenticated and not user_is_attendee %}
+                            <form action="{{ url_for('main.delete_event', event_id=event.id) }}" method="post">
+                                {{ form.hidden_tag() }}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>
